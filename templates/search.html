@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Candidates</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 600px;
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            width: 70%;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #38bdf8;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.08);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🔍 Search Candidates</h1>
+
+    <form method="POST">
+        <input type="text" name="skill" placeholder="Enter skill (e.g. python)" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Results:</h2>
+
+        {% for row in results %}
+            <div class="card">
+                <p><b>Name:</b> {{ row[0] }}</p>
+                <p><b>Email:</b> {{ row[1] }}</p>
+                <p><b>Phone:</b> {{ row[2] }}</p>
+                <p><b>Skills:</b> {{ row[3] }}</p>
+                <p><b>Education:</b> {{ row[4] }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <a href="/" class="back">⬅ Back to Home</a>
+</div>
+
+</body>
+</html>
