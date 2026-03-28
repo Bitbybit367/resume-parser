@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 # 🔗 Database Connection (works for BOTH local + Render)
-DATABASE_URL = os.environ.get("postgresql://resume_user:Jz2efCt7yyJ6gDQt2z8skHMmVcpTWdEA@dpg-d73pvdgule4c73em47bg-a.oregon-postgres.render.com/resume_db_ugts")
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if DATABASE_URL:
     # 🌍 Render (online)
