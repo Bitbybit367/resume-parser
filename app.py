@@ -1,16 +1,24 @@
 from flask import Flask, request, render_template
 import r_parser
 import psycopg2
+import os
 
 app = Flask(__name__)
 
-# 🔗 PostgreSQL Connection
-conn = psycopg2.connect(
-    host="localhost",
-    database="resume_db",
-    user="postgres",
-    password="#@TB2007#"   # 👈 replace with your password
-)
+# 🔗 Database Connection (works for BOTH local + Render)
+DATABASE_URL = os.environ.get("postgresql://resume_user:Jz2efCt7yyJ6gDQt2z8skHMmVcpTWdEA@dpg-d73pvdgule4c73em47bg-a.oregon-postgres.render.com/resume_db_ugts")
+
+if DATABASE_URL:
+    # 🌍 Render (online)
+    conn = psycopg2.connect(DATABASE_URL)
+else:
+    # 💻 Local (your PC)
+    conn = psycopg2.connect(
+        host="localhost",
+        database="resume_db",
+        user="postgres",
+        password="#@TB2007#"
+    )
 
 cur = conn.cursor()
 
@@ -83,5 +91,6 @@ def search():
     return render_template('search.html')
 
 
+# 🚀 IMPORTANT for deployment
 if __name__ == "__main__":
     app.run(debug=True)
